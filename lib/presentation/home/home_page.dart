@@ -51,30 +51,30 @@ class _HomePageState extends State<HomePage> {
             title: Text(
               "Beneficiaries",
               style: TextStyle(
-                color: _selectedIndex == 0 ? Colors.green : Colors.grey,
+                color: _selectedIndex == 0 ? Theme.of(context).primaryColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.home, color: _selectedIndex == 0 ? Colors.green : Colors.grey,),
+          icon: Icon(Icons.home, color: _selectedIndex == 0 ? Theme.of(context).primaryColor : Colors.grey,),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
               "Organization",
               style: TextStyle(
-                color: _selectedIndex == 1 ? Colors.green : Colors.grey,
+                color: _selectedIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.group_outlined, color: _selectedIndex == 1 ? Colors.green : Colors.grey,),
+          icon: Icon(Icons.group_outlined, color: _selectedIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
               "Account",
              style: TextStyle(
-                color: _selectedIndex == 2 ? Colors.green : Colors.grey,
+                color: _selectedIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.person, color: _selectedIndex == 2 ? Colors.green : Colors.grey,)),
+          icon: Icon(Icons.person, color: _selectedIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,)),
         ],
       ),
     );

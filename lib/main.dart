@@ -1,4 +1,5 @@
 import 'package:alummahbio/router/route_constants.dart';
+import 'package:alummahbio/values/branding_color.dart';
 import 'package:flutter/material.dart';
 import 'package:alummahbio/router/router.dart';
 // import 'package:flutter/src/widgets/router.dart';
@@ -15,12 +16,12 @@ class Alummahbio extends StatelessWidget {
       title: 'alummahbio',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-     primarySwatch: Colors.blue,
+     primarySwatch: brandingColor,
      visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //  home: BeneficiariesPage(),
       onGenerateRoute: ARouter.onGenerateRoute,
-      initialRoute: homeRoute,
+      initialRoute: signInRoute,
     );
   }
 }
