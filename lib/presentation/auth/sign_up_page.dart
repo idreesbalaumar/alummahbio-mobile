@@ -18,6 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        key: _key,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         brightness: Brightness.light,
@@ -26,7 +27,6 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Injector(
         inject: [Inject<SignUpFormModel>(() => SignUpFormModel())],
         builder: (context) {
-          // ignore: unused_local_variable
           final _singletonSignUpFormModel =
               Injector.getAsReactive<SignUpFormModel>();
           return Container(
@@ -34,11 +34,37 @@ class _SignUpPageState extends State<SignUpPage> {
             child: ListView(
               children: <Widget>[
                 Container(
-                  height: 250,
+                  height: 100,
                   child: Center(
                     child: Image.asset(Images.logo),
                   ),
                 ),
+                buildSizedBox(15),
+                StateBuilder<SignUpFormModel>(
+                  observe: () => _singletonSignUpFormModel,
+                  builder: (context, signUpFormModel) {
+                    return TextFormField(
+                      onChanged: (String fullName) {
+                        signUpFormModel.setState(
+                            (state) => state.setFullName(fullName),
+                            onError: (err) => {print(err)});
+                      },
+                      decoration: InputDecoration(
+                        errorText: signUpFormModel.hasError
+                            ? signUpFormModel.error.message
+                            : null,
+                        prefixIcon: Icon(Icons.person),
+                        hintText: "Enter your full name",
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                buildSizedBox(15),
                 StateBuilder<SignUpFormModel>(
                   observe: () => _singletonSignUpFormModel,
                   builder: (context, signUpFormModel) {
@@ -54,6 +80,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             : null,
                         prefixIcon: Icon(Icons.email),
                         hintText: "Enter your email",
+                        fillColor: Colors.white,
+                        filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -68,15 +96,17 @@ class _SignUpPageState extends State<SignUpPage> {
                     return TextFormField(
                       onChanged: (String fullName) {
                         signUpFormModel.setState(
-                            (state) => state.setFullName(fullName),
-                             onError: (err) => {print(err)});
+                            (state) => state.setPhoneNumber(fullName),
+                            onError: (err) => {print(err)});
                       },
                       decoration: InputDecoration(
                         errorText: signUpFormModel.hasError
                             ? signUpFormModel.error.message
                             : null,
-                        prefixIcon: Icon(Icons.person),
-                        hintText: "Enter your full naame",
+                        prefixIcon: Icon(Icons.phone),
+                        hintText: "Enter your phone number",
+                        fillColor: Colors.white,
+                        filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -92,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       onChanged: (String password) {
                         signFormModel.setState(
                             (state) => state.setPassword(password),
-                             onError: (err) => {print(err)});
+                            onError: (err) => {print(err)});
                       },
                       obscureText: true,
                       decoration: InputDecoration(
@@ -101,6 +131,34 @@ class _SignUpPageState extends State<SignUpPage> {
                             : null,
                         prefixIcon: Icon(Icons.lock),
                         hintText: "Enter your password",
+                        fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                      ),
+                    );
+                  },
+                ),
+                buildSizedBox(15),
+                StateBuilder<SignUpFormModel>(
+                  observe: () => _singletonSignUpFormModel,
+                  builder: (_, signFormModel) {
+                    return TextFormField(
+                      onChanged: (String confirmPassword) {
+                        signFormModel.setState(
+                            (state) =>
+                                state.setPasswordConfirmation(confirmPassword),
+                            onError: (err) => {print(err)});
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        errorText: signFormModel.hasError
+                            ? signFormModel.error.message
+                            : null,
+                        prefixIcon: Icon(Icons.lock),
+                        hintText: "Confirm password",
+                        fillColor: Colors.white,
+                        filled: true,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30)),
                       ),
@@ -110,27 +168,32 @@ class _SignUpPageState extends State<SignUpPage> {
                 buildSizedBox(15),
                 StateBuilder(
                   // models: [_singletonSignUpFormModel],
-                   observe: () => _singletonSignUpFormModel,
+                  observe: () => _singletonSignUpFormModel,
                   builder: (_, model) {
                     return MaterialButton(
                       onPressed: () {
-                        if (_singletonSignUpFormModel.state.validateData()) {
-                          // ignore: deprecated_member_use
-                          _key.currentState.showSnackBar(SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text("Data is invalid"),
-                          ));
+                        if (!_singletonSignUpFormModel.state.validateData()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              key: _key,
+                              backgroundColor: Colors.red,
+                              content: Text(
+                                  'Data is invalid, please fill the form before submitting!'),
+                            ),
+                          );
+                        } else {
+                          _singletonSignUpFormModel.state.submitSignUp();
                         }
                       },
                       height: 55,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      color:brandingColor,
+                      color: brandingColor,
                       child: Center(
                         child: Text(
                           "Sign Up",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Colors.white, fontSize: 20,),
                         ),
                       ),
                     );
@@ -141,8 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text("Already have an account ?"),
-                    // ignore: deprecated_member_use
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, signInRoute);
                       },
@@ -160,6 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
   SizedBox buildSizedBox(double height) {
     return SizedBox(
       height: height,

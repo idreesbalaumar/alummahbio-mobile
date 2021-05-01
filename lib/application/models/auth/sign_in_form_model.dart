@@ -26,7 +26,7 @@ class SignInFormModel {
   }
 
   bool validateData() {
-    return this.email != null &&
+   return this.email != null &&
         this.password != null &&
         this.password.length > 6 &&
         this.validateEmail(this.email);
@@ -39,7 +39,6 @@ class SignInFormModel {
   }
 
   submitSignIn() async {
-
-     await  _authState.signIn(email: this.email, password: this.password);
+    await _authState.signIn(email: this.email, password: this.password);
   }
 }

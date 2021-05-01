@@ -12,11 +12,11 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  // ignore: unused_field
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -33,11 +33,12 @@ class _SignInPageState extends State<SignInPage> {
             child: ListView(
               children: <Widget>[
                 Container(
-                  height: 250,
+                  height: 100,
                   child: Center(
                     child: Image.asset(Images.logo),
                   ),
                 ),
+                buildSizedBox(15),
                 StateBuilder<SignInFormModel>(
                   observe: () => _singletonSignInFormModel,
                   builder: (context, signInFormModel) {
@@ -53,6 +54,8 @@ class _SignInPageState extends State<SignInPage> {
                             : null,
                         prefixIcon: Icon(Icons.email),
                         hintText: "Enter your email",
+                        fillColor: Colors.white,
+                        filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -77,6 +80,8 @@ class _SignInPageState extends State<SignInPage> {
                             : null,
                         prefixIcon: Icon(Icons.lock),
                         hintText: "Enter your password",
+                        fillColor: Colors.white,
+                        filled: true,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30)),
                       ),
@@ -89,15 +94,21 @@ class _SignInPageState extends State<SignInPage> {
                   builder: (_, model) {
                     return MaterialButton(
                       onPressed: () {
-                        if (_singletonSignInFormModel.state.validateData()) {
-                          // ignore: deprecated_member_use
-                          _key.currentState.showSnackBar(SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text("Data is invalid"),
-                          ));
+                        if (!_singletonSignInFormModel.state.validateData()) {
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                key: _key,
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                    'Data is invalid, please fill the form before submitting!'),
+                              ),
+                            );
+                          }
                         } else {
                           _singletonSignInFormModel.setState(
-                              (signInFormState) => signInFormState.submitSignIn());
+                              (signInFormState) =>
+                                  signInFormState.submitSignIn());
                         }
                       },
                       height: 55,
@@ -119,8 +130,7 @@ class _SignInPageState extends State<SignInPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text("Don't have an account ?"),
-                    // ignore: deprecated_member_use
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, signUpRoute);
                       },
