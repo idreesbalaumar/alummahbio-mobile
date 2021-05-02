@@ -1,6 +1,7 @@
 import 'package:alummahbio/presentation/Beneficiaries/beneficiaries_page.dart';
 import 'package:alummahbio/presentation/auth/account_page.dart';
 import 'package:alummahbio/presentation/organisations/organizations_page.dart';
+import 'package:alummahbio/values/branding_color.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,30 +52,30 @@ class _HomePageState extends State<HomePage> {
             title: Text(
               "Beneficiaries",
               style: TextStyle(
-                color: _selectedIndex == 0 ? Theme.of(context).primaryColor : Colors.grey,
+                color: _selectedIndex == 0 ? brandingColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.home, color: _selectedIndex == 0 ? Theme.of(context).primaryColor : Colors.grey,),
+          icon: Icon(Icons.home, color: _selectedIndex == 0 ? brandingColor : Colors.grey,),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
               "Organization",
               style: TextStyle(
-                color: _selectedIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,
+                color: _selectedIndex == 1 ? brandingColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.group_outlined, color: _selectedIndex == 1 ? Theme.of(context).primaryColor : Colors.grey,),
+          icon: Icon(Icons.group_outlined, color: _selectedIndex == 1 ? brandingColor : Colors.grey,),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
               "Account",
              style: TextStyle(
-                color: _selectedIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,
+                color: _selectedIndex == 2 ? brandingColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.person, color: _selectedIndex == 2 ? Theme.of(context).primaryColor : Colors.grey,)),
+          icon: Icon(Icons.person, color: _selectedIndex == 2 ? brandingColor : Colors.grey,)),
         ],
       ),
     );
