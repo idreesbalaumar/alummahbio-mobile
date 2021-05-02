@@ -52,30 +52,30 @@ class _HomePageState extends State<HomePage> {
             title: Text(
               "Beneficiaries",
               style: TextStyle(
-                color: _selectedIndex == 0 ? brandinPrimaryColor : Colors.grey,
+                color: _selectedIndex == 0 ? brandingColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.home, color: _selectedIndex == 0 ? brandinPrimaryColor : Colors.grey,),
+          icon: Icon(Icons.home, color: _selectedIndex == 0 ? brandingColor : Colors.grey,),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
               "Organization",
               style: TextStyle(
-                color: _selectedIndex == 1 ? brandinPrimaryColor : Colors.grey,
+                color: _selectedIndex == 1 ? brandingColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.group_outlined, color: _selectedIndex == 1 ? brandinPrimaryColor : Colors.grey,),
+          icon: Icon(Icons.group_outlined, color: _selectedIndex == 1 ? brandingColor : Colors.grey,),
           ),
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
               "Account",
              style: TextStyle(
-                color: _selectedIndex == 2 ? brandinPrimaryColor : Colors.grey,
+                color: _selectedIndex == 2 ? brandingColor : Colors.grey,
                 ),
           ),
-          icon: Icon(Icons.person, color: _selectedIndex == 2 ? brandinPrimaryColor : Colors.grey,)),
+          icon: Icon(Icons.person, color: _selectedIndex == 2 ? brandingColor : Colors.grey,)),
         ],
       ),
     );

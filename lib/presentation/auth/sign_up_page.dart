@@ -2,6 +2,7 @@ import 'package:alummahbio/application/models/auth/sign_up_form_model.dart';
 import 'package:alummahbio/router/route_constants.dart';
 import 'package:alummahbio/values/branding_color.dart';
 import 'package:alummahbio/values/images.dart';
+import 'package:alummahbio/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -54,7 +55,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? signUpFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.person),
-                        hintText: "Enter your full name",
+                        // hintText: "Enter your full name",
+                        labelText: 'Enter your full name',
+                        isDense: true,
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(
@@ -79,7 +82,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? signUpFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.email),
-                        hintText: "Enter your email",
+                        // hintText: "Enter your email",
+                        labelText: 'Enter your email',
+                        isDense: true,
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(
@@ -104,7 +109,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? signUpFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.phone),
-                        hintText: "Enter your phone number",
+                        // hintText: "Enter your phone number",
+                        labelText: 'Enter your phone number',
+                        isDense: true,
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(
@@ -130,7 +137,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? signFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.lock),
-                        hintText: "Enter your password",
+                        // hintText: "Enter your password",
+                        labelText: 'Enter your password',
+                        isDense: true,
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(
@@ -156,8 +165,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? signFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.lock),
-                        hintText: "Confirm password",
+                        // hintText: "Confirm password",
                         fillColor: Colors.white,
+                        labelText: 'Confirm password',
+                        isDense: true,
                         filled: true,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30)),
@@ -173,14 +184,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     return MaterialButton(
                       onPressed: () {
                         if (!_singletonSignUpFormModel.state.validateData()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                          showSnackbar(
                               key: _key,
-                              backgroundColor: Colors.red,
-                              content: Text(
-                                  'Data is invalid, please fill the form before submitting!'),
-                            ),
-                          );
+                              message:
+                                  'Data is invalid, please fill the form before submitting!',
+                              color: Colors.red,
+                              context: context);
                         } else {
                           _singletonSignUpFormModel.state.submitSignUp();
                         }
@@ -193,7 +202,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Center(
                         child: Text(
                           "Sign Up",
-                          style: TextStyle(color: Colors.white, fontSize: 20,),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     );

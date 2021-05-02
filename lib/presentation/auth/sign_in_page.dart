@@ -1,6 +1,7 @@
 import 'package:alummahbio/application/models/auth/sign_in_form_model.dart';
 import 'package:alummahbio/router/route_constants.dart';
 import 'package:alummahbio/values/images.dart';
+import 'package:alummahbio/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -46,14 +47,22 @@ class _SignInPageState extends State<SignInPage> {
                       onChanged: (String email) {
                         signInFormModel.setState(
                             (state) => state.setEmail(email),
-                            onError: (err) => {print(err)});
+                            onError: (err) => {
+                                  showSnackbar(
+                                      color: Colors.red,
+                                      key: _key,
+                                      message: "${err.message}",
+                                      context: context),
+                                });
                       },
                       decoration: InputDecoration(
                         errorText: signInFormModel.hasError
                             ? signInFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.email),
-                        hintText: "Enter your email",
+                        // hintText: "Enter your email",
+                        labelText: 'Enter your email',
+                        isDense: true,
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(
@@ -71,7 +80,13 @@ class _SignInPageState extends State<SignInPage> {
                       onChanged: (String password) {
                         signFormModel.setState(
                             (state) => state.setPassword(password),
-                            onError: (err) => {print(err)});
+                            onError: (err) => {
+                                  showSnackbar(
+                                      color: Colors.red,
+                                      key: _key,
+                                      message: "${err.message}",
+                                      context: context),
+                                });
                       },
                       obscureText: true,
                       decoration: InputDecoration(
@@ -79,7 +94,9 @@ class _SignInPageState extends State<SignInPage> {
                             ? signFormModel.error.message
                             : null,
                         prefixIcon: Icon(Icons.lock),
-                        hintText: "Enter your password",
+                        // hintText: "Enter your password",
+                        labelText: 'Enter your password',
+                        isDense: true,
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(
@@ -96,19 +113,27 @@ class _SignInPageState extends State<SignInPage> {
                       onPressed: () {
                         if (!_singletonSignInFormModel.state.validateData()) {
                           {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                            showSnackbar(
                                 key: _key,
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                    'Data is invalid, please fill the form before submitting!'),
-                              ),
-                            );
+                                color: Colors.red,
+                                message:
+                                    "Data is invalid, please fill the form before submitting!",
+                                context: context);
                           }
                         } else {
                           _singletonSignInFormModel.setState(
-                              (signInFormState) =>
-                                  signInFormState.submitSignIn());
+                            (signInFormState) async {
+                             await signInFormState.submitSignIn();
+                             Navigator.pushNamed(context, homeRoute);
+                            },
+                            onError: (e) => {
+                              showSnackbar(
+                                  color: Colors.red,
+                                  key: _key,
+                                  message: "${e.message}",
+                                  context: context),
+                            },
+                          );
                         }
                       },
                       height: 55,

@@ -1,3 +1,5 @@
+import 'package:alummahbio/application/storage/localstorage.dart';
+import 'package:alummahbio/application/storage/storage_keys.dart';
 import 'package:alummahbio/router/route_constants.dart';
 import 'package:alummahbio/values/branding_color.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,9 @@ import 'application/repositories/auth_repository.dart';
 import 'application/state/auth_state.dart';
 // import 'package:flutter/src/widgets/router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.initializeSharedPreferences();
   runApp(Alummahbio());
 }
 
@@ -17,10 +21,10 @@ class Alummahbio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Injector(
-        inject: [Inject<AuthState>(()=> AuthState(AuthRepositoryImpl()))],
+        inject: [Inject<AuthState>(() => AuthState(AuthRepositoryImpl()))],
         builder: (context) {
           return MaterialApp(
-            title: 'alummahbio',
+            title: 'Alummahbio',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               scaffoldBackgroundColor: AppTheme.notWhite.withOpacity(1),
@@ -31,7 +35,8 @@ class Alummahbio extends StatelessWidget {
             ),
             //  home: BeneficiariesPage(),
             onGenerateRoute: ARouter.onGenerateRoute,
-            initialRoute: signInRoute,
+            initialRoute:
+                LocalStorage.getItem(TOKEN) != null ? homeRoute : signInRoute,
           );
         });
   }
