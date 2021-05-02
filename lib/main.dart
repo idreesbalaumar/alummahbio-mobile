@@ -1,5 +1,8 @@
 import 'package:alummahbio/application/storage/localstorage.dart';
 import 'package:alummahbio/application/storage/storage_keys.dart';
+import 'package:alummahbio/presentation/auth/sign_in_page.dart';
+import 'package:alummahbio/presentation/pages/intro_screen.dart';
+import 'package:alummahbio/presentation/pages/splash_screen.dart';
 import 'package:alummahbio/router/route_constants.dart';
 import 'package:alummahbio/values/branding_color.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +12,13 @@ import 'package:states_rebuilder/states_rebuilder.dart';
 import 'app_theme.dart';
 import 'application/repositories/auth_repository.dart';
 import 'application/state/auth_state.dart';
+
 // import 'package:flutter/src/widgets/router.dart';
+//
+var routes = <String, WidgetBuilder>{
+  "/login": (BuildContext context) => SignInPage(),
+  "/intro": (BuildContext context) => IntroScreen(),
+};
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,10 +42,12 @@ class Alummahbio extends StatelessWidget {
               primarySwatch: brandingColor,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
+            home: SplashScreen(),
+            routes: routes,
             //  home: BeneficiariesPage(),
-            onGenerateRoute: ARouter.onGenerateRoute,
-            initialRoute:
-                LocalStorage.getItem(TOKEN) != null ? homeRoute : signInRoute,
+            // onGenerateRoute: ARouter.onGenerateRoute,
+            // initialRoute:
+            //     LocalStorage.getItem(TOKEN) != null ? homeRoute : signInRoute,
           );
         });
   }

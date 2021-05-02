@@ -1,5 +1,5 @@
 import 'package:alummahbio/application/repositories/auth_repository.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class AuthState {
   final AuthRepository _authRepository;
