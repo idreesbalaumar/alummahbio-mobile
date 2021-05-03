@@ -1,5 +1,6 @@
 import 'package:alummahbio/application/models/auth/sign_in_form_model.dart';
 import 'package:alummahbio/router/route_constants.dart';
+import 'package:alummahbio/utils/my_navigator.dart';
 import 'package:alummahbio/values/images.dart';
 import 'package:alummahbio/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
@@ -157,7 +158,7 @@ class _SignInPageState extends State<SignInPage> {
                     Text("Don't have an account ?"),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, signUpRoute);
+                        MyNavigator.goToSignUp(context);
                       },
                       child: Text(
                         "Sign Up",
