@@ -1,18 +1,18 @@
 class AlummahBio {
   static const String name = "Al'ummahbio";
-  static const String desc = "Beneficiary Data\n Collection App.";
+  static const String desc = "POWERED BY:\n Al-ummah Development Foundation (ADF).";
   static const String wt1 = "WELCOME";
   static const String wc1 =
-      "Al'ummahbio is Beneficiary Data\n  Collection App for NGO's";
-  static const String wt2 = "DISCOVER PRODUCT";
+      "Al'ummahbio App for collecting all kinds of \n beneficiary information (textual and images)";
+  static const String wt2 = "DEDICATED INTERFACE";
   static const String wc2 =
-      "Search Latest and Featured Product\n With Best Price";
-  static const String wt3 = "ADD TO CART";
+      "Foundations/NGO’s/Organizations register as Agents \n to capture/collect data of beneficiaries.";
+  static const String wt3 = "STATISTICS & REPORTS";
   static const String wc3 =
-      "Add to Cart All Product You need\n And Checkout the Order";
-  static const String wt4 = "VERIFY AND RECEIVE";
+      "Get a glean insights of how to be impactful in \n various community projects using data.";
+  static const String wt4 = "REGISTER NOW & GET APPROVED";
   static const String wc4 =
-      "We Will Verify Your Order\n Pay the bill and Receive the Product";
+      "Fill in all neccessary information to set up an agent  \n accounnt. Get approved and start immediately.";
   static const String skip = "SKIP";
   static const String next = "NEXT";
   static const String gotIt = "GOT IT";

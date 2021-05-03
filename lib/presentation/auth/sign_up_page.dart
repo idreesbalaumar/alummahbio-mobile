@@ -1,5 +1,7 @@
 import 'package:alummahbio/application/models/auth/sign_up_form_model.dart';
+// ignore: unused_import
 import 'package:alummahbio/router/route_constants.dart';
+import 'package:alummahbio/utils/my_navigator.dart';
 import 'package:alummahbio/values/branding_color.dart';
 import 'package:alummahbio/values/images.dart';
 import 'package:alummahbio/widgets/show_snackbar.dart';
@@ -218,7 +220,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text("Already have an account ?"),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, signInRoute);
+                        MyNavigator.goToSinIn(context);
                       },
                       child: Text(
                         "Sign In",

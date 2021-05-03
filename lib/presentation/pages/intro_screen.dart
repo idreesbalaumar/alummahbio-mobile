@@ -29,8 +29,8 @@ class IntroScreenState extends State<IntroScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFEEEEEE),
-      // color: Theme.of(context).primaryColor,
+      // color: Color(0xFFEEEEEE),
+      color: Theme.of(context).primaryColor,
       padding: EdgeInsets.all(10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,22 +46,22 @@ class IntroScreenState extends State<IntroScreen> {
                 Walkthrough(
                   title: AlummahBio.wt1,
                   content: AlummahBio.wc1,
-                  imageIcon: Icons.mobile_screen_share,
+                  imageIcon: Icons.contacts_rounded,
                 ),
                 Walkthrough(
                   title: AlummahBio.wt2,
                   content: AlummahBio.wc2,
-                  imageIcon: Icons.search,
+                  imageIcon: Icons.reduce_capacity_rounded,
                 ),
                 Walkthrough(
                   title: AlummahBio.wt3,
                   content: AlummahBio.wc3,
-                  imageIcon: Icons.shopping_cart,
+                  imageIcon: Icons.equalizer_rounded,
                 ),
                 Walkthrough(
                   title: AlummahBio.wt4,
                   content: AlummahBio.wc4,
-                  imageIcon: Icons.verified_user,
+                  imageIcon: Icons.verified_user_rounded,
                 ),
               ],
               controller: controller,
@@ -77,20 +77,20 @@ class IntroScreenState extends State<IntroScreen> {
                 TextButton(
                   child: Text(lastPage ? "" : AlummahBio.skip,
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0)),
                   onPressed: () =>
-                      lastPage ? null : MyNavigator.goToLogin(context),
+                      lastPage ? null : MyNavigator.goToSignUp(context),
                 ),
                 TextButton(
                   child: Text(lastPage ? AlummahBio.gotIt : AlummahBio.next,
                       style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0)),
                   onPressed: () => lastPage
-                      ? MyNavigator.goToLogin(context)
+                      ? MyNavigator.goToSignUp(context)
                       : controller.nextPage(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.easeIn),

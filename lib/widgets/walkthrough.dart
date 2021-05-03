@@ -27,7 +27,7 @@ class WalkthroughState extends State<Walkthrough>
   void initState() {
     super.initState();
     animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 700));
     animation = Tween(begin: -250.0, end: 0.0).animate(
         CurvedAnimation(parent: animationController, curve: Curves.easeInOut));
 
@@ -79,7 +79,7 @@ class WalkthroughState extends State<Walkthrough>
             new Icon(
               widget.imageIcon,
               size: 100.0,
-              color: widget.imagecolor,
+              color: Theme.of(context).primaryColor,
             )
           ],
         ),
