@@ -1,6 +1,6 @@
 import 'package:alummahbio/presentation/Beneficiaries/beneficiaries_page.dart';
 import 'package:alummahbio/presentation/auth/account_page.dart';
-import 'package:alummahbio/presentation/organisations/organizations_page.dart';
+import 'package:alummahbio/presentation/organisations/dashboard_page.dart';
 import 'package:alummahbio/values/branding_color.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +14,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
   List<Widget> _screens = [
+    DashboardPage(),
     BeneficiariesPage(),
-    OrganizationsPage(),
-    AccountPage()
+    AccountPage(),
+
   ];
 
   int _selectedIndex = 0;
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
-              "Beneficiaries",
+              "Dashboard",
               style: TextStyle(
                 color: _selectedIndex == 0 ? brandingColor : Colors.grey,
                 ),
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             // ignore: deprecated_member_use
             title: Text(
-              "Organization",
+              "Beneficiaries",
               style: TextStyle(
                 color: _selectedIndex == 1 ? brandingColor : Colors.grey,
                 ),
