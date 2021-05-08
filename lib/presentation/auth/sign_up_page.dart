@@ -1,6 +1,4 @@
 import 'package:alummahbio/application/models/auth/sign_up_form_model.dart';
-// ignore: unused_import
-import 'package:alummahbio/router/route_constants.dart';
 import 'package:alummahbio/utils/my_navigator.dart';
 import 'package:alummahbio/values/branding_color.dart';
 import 'package:alummahbio/values/images.dart';
@@ -30,8 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Injector(
         inject: [Inject<SignUpFormModel>(() => SignUpFormModel())],
         builder: (context) {
-          final _singletonSignUpFormModel =
-              Injector.getAsReactive<SignUpFormModel>();
+          final _singletonSignUpFormModel = RM.get<SignUpFormModel>();
           return Container(
             padding: EdgeInsets.all(16),
             child: ListView(
@@ -153,18 +150,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 buildSizedBox(15),
                 StateBuilder<SignUpFormModel>(
                   observe: () => _singletonSignUpFormModel,
-                  builder: (_, signFormModel) {
+                  builder: (_, model) {
                     return TextFormField(
                       onChanged: (String confirmPassword) {
-                        signFormModel.setState(
+                        model.setState(
                             (state) =>
                                 state.setPasswordConfirmation(confirmPassword),
                             onError: (err) => {print(err)});
                       },
                       obscureText: true,
                       decoration: InputDecoration(
-                        errorText: signFormModel.hasError
-                            ? signFormModel.error.message
+                        errorText: model.hasError
+                            ? model.error.message
                             : null,
                         prefixIcon: Icon(Icons.lock),
                         // hintText: "Confirm password",

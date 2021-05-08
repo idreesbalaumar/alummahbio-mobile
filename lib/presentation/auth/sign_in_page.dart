@@ -29,7 +29,7 @@ class _SignInPageState extends State<SignInPage> {
         inject: [Inject<SignInFormModel>(() => SignInFormModel())],
         builder: (context) {
           final _singletonSignInFormModel =
-              Injector.getAsReactive<SignInFormModel>();
+              RM.get<SignInFormModel>();
           return Container(
             padding: EdgeInsets.all(16),
             child: ListView(
