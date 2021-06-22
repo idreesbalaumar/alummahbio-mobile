@@ -9,6 +9,8 @@ import 'package:alummahbio/application/classes/common/state_of_res.dart';
 class Beneficiary {
   final int id;
   final String firstName;
+  final String middleName;
+  final String surname;
   final Gender gender;
   final String dob;
   final String phoneNumber;
@@ -34,6 +36,8 @@ class Beneficiary {
    Beneficiary.fromJson(Map<String, dynamic> jsonMap)
   : id = jsonMap['id'] ?? 0,
   firstName = jsonMap['firstName'] ?? '',
+  middleName = jsonMap['middleName'] ?? '',
+  surname = jsonMap['surname'] ?? '',
   gender = jsonMap['gender'] !=null
   ? Gender.fromJson(jsonMap['gender'])
   : null,

@@ -17,6 +17,8 @@ class ARouter {
         return MaterialPageRoute(builder: (_) => SignInPage());
       case signUpRoute:
         return MaterialPageRoute(builder: (_) => SignUpPage());
+      case introRoute:
+        return MaterialPageRoute(builder: (_) => SignUpPage());
       default:
         return MaterialPageRoute(builder: (_) => NotFoundPage());
 

@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 showSnackbar(
     {@required GlobalKey<ScaffoldState> key,
     @required String message,
-    Color color,
-    BuildContext context}) {
-  ScaffoldMessenger.of(context).showSnackBar(
+    Color color}) {
+  key.currentState.showSnackBar(
     SnackBar(
-      key: key,
       backgroundColor: color ?? brandingColor,
       content: Text(message),
     ),
