@@ -18,7 +18,7 @@ CommonError showNetworkError(DioError networkError) {
         message += "\n$err";
       }
     } else {
-      message = "An error is occured";
+      message = "An error occured";
     }
   } else {
     message = "Can't reach to the server";

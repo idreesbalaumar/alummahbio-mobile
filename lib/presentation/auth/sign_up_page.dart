@@ -5,6 +5,7 @@ import 'package:alummahbio/values/images.dart';
 import 'package:alummahbio/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:validators/validators.dart' as validator;
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key}) : super(key: key);
@@ -188,7 +189,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               message:
                                   'Data is invalid, please fill the form before submitting!',
                               color: Colors.red,
-                              context: context);
+                              // context: context
+                              );
                         } else {
                           _singletonSignUpFormModel.state.submitSignUp();
                         }

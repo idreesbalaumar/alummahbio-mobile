@@ -15,16 +15,17 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  // final GlobalKey<State> _LoaderDialog = new GlobalKey<State>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        brightness: Brightness.light,
-        automaticallyImplyLeading: false,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0.0,
+      //   brightness: Brightness.light,
+      //   automaticallyImplyLeading: false,
+      // ),
       body: Injector(
         inject: [Inject<SignInFormModel>(() => SignInFormModel())],
         builder: (context) {
@@ -43,22 +44,23 @@ class _SignInPageState extends State<SignInPage> {
                 buildSizedBox(15),
                 StateBuilder<SignInFormModel>(
                   observe: () => _singletonSignInFormModel,
-                  builder: (context, signInFormModel) {
+                  builder: (_, model) {
                     return TextFormField(
                       onChanged: (String email) {
-                        signInFormModel.setState(
+                        model.setState(
                             (state) => state.setEmail(email),
                             onError: (err) => {
                                   showSnackbar(
                                       color: Colors.red,
                                       key: _key,
                                       message: "${err.message}",
-                                      context: context),
+                                      // context: context
+                                      ),
                                 });
                       },
                       decoration: InputDecoration(
-                        errorText: signInFormModel.hasError
-                            ? signInFormModel.error.message
+                        errorText: model.hasError
+                            ? model.error.message
                             : null,
                         prefixIcon: Icon(Icons.email),
                         // hintText: "Enter your email",
@@ -86,7 +88,8 @@ class _SignInPageState extends State<SignInPage> {
                                       color: Colors.red,
                                       key: _key,
                                       message: "${err.message}",
-                                      context: context),
+                                      // context: context
+                                      ),
                                 });
                       },
                       obscureText: true,
@@ -119,20 +122,24 @@ class _SignInPageState extends State<SignInPage> {
                                 color: Colors.red,
                                 message:
                                     "Data is invalid, please fill the form before submitting!",
-                                context: context);
+                                // context: context
+                                );
                           }
                         } else {
                           _singletonSignInFormModel.setState(
                             (signInFormState) async {
                              await signInFormState.submitSignIn();
+                            //  LoaderDialog.showLoadingDialog(context, _LoaderDialog);
                              Navigator.pushNamed(context, homeRoute);
+                            //  Navigator.of(_LoaderDialog.currentContext,rootNavigator: true).pop();
                             },
                             onError: (e) => {
                               showSnackbar(
                                   color: Colors.red,
                                   key: _key,
                                   message: "${e.message}",
-                                  context: context),
+                                  // context: context
+                                  ),
                             },
                           );
                         }

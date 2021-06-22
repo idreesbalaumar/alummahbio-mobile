@@ -16,4 +16,16 @@ class MyNavigator {
   static void goToSinIn(BuildContext context) {
     Navigator.pushNamed(context, "/sign-in");
   }
+  static void goToDashboard(BuildContext context) {
+    Navigator.pushNamed(context, "/dashboard");
+  }
+  static void goToBeneficiaries(BuildContext context) {
+    Navigator.pushNamed(context, "/beneficiaries");
+  }
+  static void goToNewBeneficiaries(BuildContext context) {
+    Navigator.pushNamed(context, "/new-beneficiaries");
+  }
+  static void goToProfile(BuildContext context) {
+    Navigator.pushNamed(context, "/profife");
+  }
 }

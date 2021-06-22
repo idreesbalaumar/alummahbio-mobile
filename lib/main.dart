@@ -2,14 +2,19 @@ import 'package:alummahbio/application/repositories/beneficiary_repository.dart'
 import 'package:alummahbio/application/state/beneficiary_state.dart';
 import 'package:alummahbio/application/storage/localstorage.dart';
 import 'package:alummahbio/application/storage/storage_keys.dart';
+import 'package:alummahbio/presentation/Beneficiaries/beneficiaries_page.dart';
+import 'package:alummahbio/presentation/Beneficiaries/capture_beneficiary.dart';
+import 'package:alummahbio/presentation/auth/account_page.dart';
 import 'package:alummahbio/presentation/auth/sign_in_page.dart';
 import 'package:alummahbio/presentation/auth/sign_up_page.dart';
+import 'package:alummahbio/presentation/organisations/dashboard_page.dart';
 import 'package:alummahbio/presentation/pages/intro_screen.dart';
 import 'package:alummahbio/presentation/pages/splash_screen.dart';
 import 'package:alummahbio/router/route_constants.dart';
 import 'package:alummahbio/router/router.dart';
 import 'package:alummahbio/values/branding_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import 'app_theme.dart';
@@ -23,12 +28,19 @@ var routes = <String, WidgetBuilder>{
   "/sign-up": (BuildContext context) => SignUpPage(),
   "/intro": (BuildContext context) => IntroScreen(),
   "/sign-in": (BuildContext context) => SignInPage(),
+  "/dashboard": (BuildContext context) => DashboardPage(),
+  "/beneficiaries": (BuildContext context) => BeneficiariesPage(),
+  "/new-beneficiaries": (BuildContext context) => CaptureBeneficiary(),
+  "/profife": (BuildContext context) => AccountPage(),
 };
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalStorage.initializeSharedPreferences();
-  runApp(Alummahbio());
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]).then((_) => runApp(Alummahbio()));
 }
 
 class Alummahbio extends StatelessWidget {
